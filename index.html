@@ -1095,8 +1095,16 @@
                 const columns = Object.keys(sampleRow);
                 
                 userStock = [];
+                let debugInfo = [];
                 
-                for (let row of jsonData) {
+                for (let i = 0; i < jsonData.length; i++) {
+                    const row = jsonData[i];
+                    
+                    // Log first 3 rows for debugging
+                    if (i < 3) {
+                        debugInfo.push(`Row ${i}: Make="${row.Make}", Price="${row['Proposed Price']}", Type=${typeof row['Proposed Price']}`);
+                    }
+                    
                     // Get make, model, memory, grade
                     const make = (row.Make || row.make || '').toString().toUpperCase();
                     const model = (row.Model || row.model || '').toString().toUpperCase();
@@ -1104,7 +1112,10 @@
                     const grade = (row.Grade || row.grade || '').toString().toUpperCase();
                     
                     // Skip if missing essential fields
-                    if (!make || !model || !memory || !grade) continue;
+                    if (!make || !model || !memory || !grade) {
+                        if (i < 3) debugInfo.push(`  -> Skipped: missing field`);
+                        continue;
+                    }
                     
                     // Get quantity
                     let quantity = 1;
@@ -1114,19 +1125,40 @@
                     else if (row['Quantity Available'] !== undefined) quantity = parseInt(row['Quantity Available']) || 1;
                     else if (row['Customer Demand'] !== undefined) quantity = parseInt(row['Customer Demand']) || 1;
                     
-                    // Get price - check each column individually (like Quick Check does)
+                    // Get price - check each column individually and strip currency symbols
                     let purchasePrice = 0;
-                    if (row['Proposed Price']) purchasePrice = parseFloat(row['Proposed Price']);
-                    else if (row['Initial Price']) purchasePrice = parseFloat(row['Initial Price']);
-                    else if (row['Customer Bid']) purchasePrice = parseFloat(row['Customer Bid']);
-                    else if (row['Negotiated Bid']) purchasePrice = parseFloat(row['Negotiated Bid']);
-                    else if (row['Your Price']) purchasePrice = parseFloat(row['Your Price']);
-                    else if (row.Response) purchasePrice = parseFloat(row.Response);
-                    else if (row['Final_Price']) purchasePrice = parseFloat(row['Final_Price']);
-                    else if (row['Purchase Price']) purchasePrice = parseFloat(row['Purchase Price']);
-                    else if (row.Price) purchasePrice = parseFloat(row.Price);
+                    let priceValue = null;
                     
-                    if (isNaN(purchasePrice)) purchasePrice = 0;
+                    if (row['Proposed Price'] !== undefined && row['Proposed Price'] !== null && row['Proposed Price'] !== '') {
+                        priceValue = row['Proposed Price'];
+                    } else if (row['Initial Price']) {
+                        priceValue = row['Initial Price'];
+                    } else if (row['Customer Bid']) {
+                        priceValue = row['Customer Bid'];
+                    } else if (row['Negotiated Bid']) {
+                        priceValue = row['Negotiated Bid'];
+                    } else if (row['Your Price']) {
+                        priceValue = row['Your Price'];
+                    } else if (row.Response) {
+                        priceValue = row.Response;
+                    } else if (row['Final_Price']) {
+                        priceValue = row['Final_Price'];
+                    } else if (row['Purchase Price']) {
+                        priceValue = row['Purchase Price'];
+                    } else if (row.Price) {
+                        priceValue = row.Price;
+                    }
+                    
+                    if (priceValue !== null) {
+                        // Convert to string and remove currency symbols (€, $, £, etc.) and commas
+                        const cleanPrice = priceValue.toString().replace(/[€$£,\s]/g, '');
+                        purchasePrice = parseFloat(cleanPrice);
+                        if (isNaN(purchasePrice)) purchasePrice = 0;
+                    }
+                    
+                    if (i < 3) {
+                        debugInfo.push(`  -> Price parsed: ${purchasePrice}, Valid: ${purchasePrice > 0}`);
+                    }
                     
                     // Only add if has price
                     if (purchasePrice > 0) {
@@ -1142,7 +1174,7 @@
                 }
 
                 if (userStock.length === 0) {
-                    statusDiv.textContent = '⚠ No items with prices > 0. Columns found: ' + columns.join(', ');
+                    statusDiv.textContent = '⚠ No items with prices > 0. Debug: ' + debugInfo.join('; ');
                     statusDiv.style.color = '#dc3545';
                     return;
                 }
