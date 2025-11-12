@@ -133,49 +133,6 @@
             }
         }
 
-        .quick-result-header {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .quick-result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .quick-stat {
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .quick-stat-label {
-            font-size: 0.85em;
-            color: #636e72;
-            margin-bottom: 5px;
-        }
-
-        .quick-stat-value {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2d3436;
-        }
-
-        .quick-stat.good {
-            border-left-color: #00b894;
-            background: #d4edda;
-        }
-
-        .quick-stat.bad {
-            border-left-color: #d63031;
-            background: #f8d7da;
-        }
-
         .upload-section {
             background: #f8f9fa;
             padding: 20px 30px;
@@ -280,19 +237,6 @@
             box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
         }
 
-        .refresh-btn:active {
-            transform: translateY(0);
-        }
-
-        .refresh-btn.changed {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3); }
-            50% { box-shadow: 0 4px 15px rgba(40, 167, 69, 0.6); }
-        }
-
         .control-btn {
             background: #667eea;
             color: white;
@@ -308,10 +252,6 @@
         .control-btn:hover {
             background: #5568d3;
             transform: translateY(-1px);
-        }
-
-        .control-btn:active {
-            transform: translateY(0);
         }
 
         .control-btn.active {
@@ -333,10 +273,6 @@
             margin-top: 20px;
         }
 
-        .rec-grid.table-view {
-            display: block;
-        }
-
         .table-container {
             overflow-x: auto;
             margin-top: 20px;
@@ -352,7 +288,7 @@
             background: white;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 14px;
-            min-width: 1200px; /* Ensure table doesn't get too narrow */
+            min-width: 1200px;
         }
 
         .data-table th {
@@ -387,29 +323,6 @@
 
         .data-table tr.bad-row {
             background: #fff5f5;
-        }
-
-        .data-table .status-good {
-            color: #28a745;
-            font-weight: 600;
-        }
-
-        .data-table .status-bad {
-            color: #dc3545;
-            font-weight: 600;
-        }
-
-        /* Improved table responsiveness */
-        @media (max-width: 1400px) {
-            .data-table {
-                min-width: 1000px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .data-table {
-                min-width: 800px;
-            }
         }
 
         .rec-card {
@@ -458,19 +371,6 @@
             color: white;
         }
 
-        .rec-card h3 {
-            color: #333;
-            margin-bottom: 5px;
-            font-size: 1em;
-            padding-right: 80px;
-        }
-
-        .model-info {
-            color: #6c757d;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-        }
-
         .grade-badge {
             display: inline-block;
             padding: 3px 10px;
@@ -484,81 +384,13 @@
         .grade-2 { background: #ffc107; color: #000; }
         .grade-3 { background: #fd7e14; color: white; }
         .grade-pgl { background: #6f42c1; color: white; }
+        .grade-aa { background: #17a2b8; color: white; }
 
         .price-comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin: 15px 0;
-        }
-
-        .price-box {
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .max-price-box {
-            background: #e7f3ff;
-        }
-
-        .your-price-box {
-            background: #f0fff4;
-        }
-
-        .your-price-box.overpaid {
-            background: #fff5f5;
-        }
-
-        .price-label {
-            font-size: 0.75em;
-            color: #6c757d;
-            margin-bottom: 3px;
-        }
-
-        .price-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .your-price-box .price-value {
-            color: #28a745;
-        }
-
-        .your-price-box.overpaid .price-value {
-            color: #dc3545;
-        }
-
-        .savings {
-            font-size: 0.85em;
-            margin-top: 5px;
-            font-weight: 600;
-            color: #28a745;
-        }
-
-        .overpaid {
-            color: #dc3545;
-        }
-
-        .stats {
-            font-size: 0.85em;
-            color: #6c757d;
-            margin-top: 10px;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 4px 0;
-        }
-
-        .cost-breakdown {
-            background: #fff3cd;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 0.8em;
         }
 
         .info-box {
@@ -570,175 +402,6 @@
             font-size: 0.9em;
         }
 
-        .summary-box {
-            background: #f8f9fa;
-            border: 2px solid #667eea;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .summary-item {
-            text-align: center;
-        }
-
-        .summary-label {
-            font-size: 0.9em;
-            color: #6c757d;
-            margin-bottom: 5px;
-        }
-
-        .summary-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .summary-value.good {
-            color: #28a745;
-        }
-
-        .summary-value.bad {
-            color: #dc3545;
-        }
-
-        /* New Dashboard Styles */
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            border-top: 4px solid #667eea;
-        }
-
-        .stat-card.good {
-            border-top-color: #28a745;
-        }
-
-        .stat-card.bad {
-            border-top-color: #dc3545;
-        }
-
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .stat-label {
-            color: #6c757d;
-            font-size: 0.9em;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            background: #5568d3;
-            transform: translateY(-1px);
-        }
-
-        .action-btn.export {
-            background: #28a745;
-        }
-
-        .action-btn.export:hover {
-            background: #218838;
-        }
-
-        h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .container {
-                background: #2d3748;
-                color: #e2e8f0;
-            }
-            
-            .rec-card, .stat-card {
-                background: #4a5568;
-                color: #e2e8f0;
-            }
-            
-            .info-box {
-                background: #4a5568;
-                color: #e2e8f0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .settings-bar {
-                grid-template-columns: 1fr;
-            }
-            .rec-grid {
-                grid-template-columns: 1fr;
-            }
-            .price-comparison {
-                grid-template-columns: 1fr;
-            }
-            .dashboard-stats {
-                grid-template-columns: 1fr;
-            }
-            .action-buttons {
-                flex-direction: column;
-            }
-            .container {
-                max-width: 100%;
-                border-radius: 10px;
-            }
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Toast notifications */
         .toast {
             position: fixed;
             top: 20px;
@@ -759,6 +422,18 @@
 
         .toast.error {
             background: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .settings-bar {
+                grid-template-columns: 1fr;
+            }
+            .rec-grid {
+                grid-template-columns: 1fr;
+            }
+            .price-comparison {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -837,6 +512,7 @@
                     <input type="file" id="salesUpload" accept=".xlsx,.xls,.csv">
                 </div>
                 <span id="salesUploadStatus" class="upload-status"></span>
+                <button id="loadSampleData" class="control-btn" style="background: #6f42c1; margin-left: 10px;">Load Sample Data</button>
             </div>
         </div>
 
@@ -882,22 +558,15 @@
 
         <div class="main-content">
             
-            <!-- Dashboard Stats -->
-            <div id="dashboardStats" class="dashboard-stats" style="display: none;">
-                <!-- Stats will be populated dynamically -->
-            </div>
-            
             <div class="info-box" style="background: #d4edda; border-left-color: #28a745;">
                 <strong>💡 Tip:</strong> The upload button is at the top of the page! Upload your Excel file (like the proposal) to see how your prices compare to the recommended maximums.
             </div>
             
-            <div class="action-buttons">
+            <div class="action-buttons" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
                 <button id="viewToggleBtn" class="control-btn active">📦 Card View</button>
                 <button id="sortAlphaBtn" class="control-btn">🔤 Sort A-Z</button>
                 <button id="sortProfitBtn" class="control-btn">💰 Sort by Profit</button>
-                <button id="exportExcelBtn" class="control-btn action-btn export">📊 Export Excel</button>
-                <button id="exportSummaryBtn" class="control-btn action-btn">📋 Export Summary</button>
-                <button id="showAllBtn" class="control-btn" style="display: none;">👁️ Show All Items</button>
+                <button id="exportExcelBtn" class="control-btn">📊 Export Excel</button>
             </div>
             
             <div class="recommendations">
@@ -916,70 +585,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        // ... (the rest of your JavaScript code remains the same, but I'll highlight key improvements)
+        // Initialize with empty sales data - will be populated from file
+        let REFURBED_SALES_PRICES = {};
+        let userStock = [];
+        let currentSort = 'default';
+        let currentView = 'cards';
 
-        // Improved table rendering with better width handling
-        function renderTableView(displayData) {
-            const accessories = parseFloat(document.getElementById('accessories').value);
-            const freight = parseFloat(document.getElementById('freight').value);
-            
-            let html = '<div class="table-container"><table class="data-table">';
-            html += `
-                <thead>
-                    <tr>
-                        <th style="min-width: 80px;">Make</th>
-                        <th style="min-width: 120px;">Model</th>
-                        <th style="min-width: 80px;">Memory</th>
-                        <th style="min-width: 70px;">Grade</th>
-                        <th style="min-width: 50px;">Qty</th>
-                        <th style="min-width: 90px;">Your Price</th>
-                        <th style="min-width: 110px;">Max Recommended</th>
-                        <th style="min-width: 90px;">Difference</th>
-                        <th style="min-width: 100px;">Refurbed Avg</th>
-                        <th style="min-width: 80px;">Commission</th>
-                        <th style="min-width: 70px;">VAT</th>
-                        <th style="min-width: 90px;">Acc+Freight</th>
-                        <th style="min-width: 90px;">Exp. Profit</th>
-                        <th style="min-width: 90px;">Exp. Margin</th>
-                        <th style="min-width: 60px;">Sales</th>
-                        <th style="min-width: 70px;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-            `;
+        const platformCommissions = {
+            'refurbed': 12,
+            'backmarket': 15
+        };
 
-            displayData.forEach(({ item, matchedPrice, avgSalePrice, maxPurchasePrice, yourPrice, difference, isGoodDeal, profitCalc }) => {
-                const rowClass = isGoodDeal ? 'good-row' : 'bad-row';
-                const statusClass = isGoodDeal ? 'status-good' : 'status-bad';
-                const statusText = isGoodDeal ? '✓ Good' : '⚠ Over';
-
-                html += `
-                    <tr class="${rowClass}">
-                        <td>${item.make}</td>
-                        <td>${item.model}</td>
-                        <td>${item.memory}</td>
-                        <td>${item.grade}</td>
-                        <td style="text-align: center;">${item.quantity}</td>
-                        <td style="text-align: right; font-weight: 600;">€${yourPrice.toFixed(2)}</td>
-                        <td style="text-align: right; background: #e7f3ff; font-weight: 600;">€${maxPurchasePrice.toFixed(2)}</td>
-                        <td style="text-align: right; font-weight: 600;" class="${statusClass}">${difference >= 0 ? '+' : ''}€${difference.toFixed(2)}</td>
-                        <td style="text-align: right;">€${avgSalePrice.toFixed(2)}</td>
-                        <td style="text-align: right;">€${profitCalc.commissionCost.toFixed(2)}</td>
-                        <td style="text-align: right;">€${profitCalc.vatCost.toFixed(2)}</td>
-                        <td style="text-align: right;">€${(accessories + freight).toFixed(2)}</td>
-                        <td style="text-align: right; color: ${profitCalc.profit > 0 ? '#28a745' : '#dc3545'}; font-weight: 600;">€${profitCalc.profit.toFixed(2)}</td>
-                        <td style="text-align: right; color: ${profitCalc.margin > 0 ? '#28a745' : '#dc3545'}; font-weight: 600;">${(profitCalc.margin * 100).toFixed(1)}%</td>
-                        <td style="text-align: center;">${matchedPrice.salesCount}x</td>
-                        <td class="${statusClass}" style="text-align: center; font-weight: 600;">${statusText}</td>
-                    </tr>
-                `;
-            });
-
-            html += '</tbody></table></div>';
-            return html;
-        }
-
-        // New function to show toast notifications
+        // Toast notification function
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -990,60 +607,221 @@
             }, 3000);
         }
 
-        // Enhanced export functionality
-        document.getElementById('exportSummaryBtn').addEventListener('click', function() {
-            if (userStock.length === 0) {
-                showToast('Please upload a file first!', true);
-                return;
-            }
-            exportToProposal();
-            showToast('Summary exported successfully!');
-        });
-
-        // Improved file upload with better error handling
-        document.getElementById('stockUpload').addEventListener('change', async function(e) {
+        // Fixed sales upload handler
+        document.getElementById('salesUpload').addEventListener('change', async function(e) {
             const file = e.target.files[0];
             if (!file) return;
 
-            const statusDiv = document.getElementById('uploadStatus');
-            const clearBtn = document.getElementById('clearFileBtn');
+            const statusDiv = document.getElementById('salesUploadStatus');
             statusDiv.textContent = 'Processing...';
             statusDiv.style.color = '#17a2b8';
 
-            // Show loading state
-            const refreshBtn = document.getElementById('refreshBtn');
-            const originalText = refreshBtn.innerHTML;
-            refreshBtn.innerHTML = '<div class="loading"></div> Processing...';
-
             try {
-                // ... (your existing file processing code)
+                const data = await file.arrayBuffer();
+                const workbook = XLSX.read(data);
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+
+                console.log('Processing sales data file:', jsonData.length, 'rows');
+                console.log('Sample row:', jsonData[0]);
+
+                let updatedCount = 0;
+                REFURBED_SALES_PRICES = {}; // Clear existing data
+
+                jsonData.forEach(row => {
+                    // Handle different column name variations
+                    const model = (row.Model || row.model || '').toString().trim().toUpperCase();
+                    const memory = (row.Memory || row.memory || row.Storage || '').toString().trim();
+                    const grade = (row.Grade || row.grade || '').toString().trim().toUpperCase();
+                    const avgPrice = parseFloat(row.avgPrice || row['Average Price'] || row.avg_price || row['avgPrice'] || 0);
+                    const salesCount = parseInt(row.salesCount || row['Sales Count'] || row.sales_count || row['salesCount'] || 0);
+                    
+                    console.log(`Processing: ${model} | ${memory} | ${grade} | ${avgPrice} | ${salesCount}`);
+
+                    if (model && memory && grade && avgPrice > 0) {
+                        // Create consistent key format
+                        const key = `${model}|${memory}|${grade}`;
+                        REFURBED_SALES_PRICES[key] = { 
+                            avgPrice: avgPrice, 
+                            salesCount: salesCount 
+                        };
+                        updatedCount++;
+                        console.log(`Added: ${key} - €${avgPrice} (${salesCount} sales)`);
+                    }
+                });
+
+                statusDiv.textContent = `✓ Updated ${updatedCount} prices`;
+                statusDiv.style.color = '#28a745';
                 
-                // Show success message
-                showToast(`Successfully loaded ${userStock.length} items`);
+                console.log('Final sales data count:', Object.keys(REFURBED_SALES_PRICES).length);
                 
+                // Populate Quick Check dropdowns with new data
+                populateQuickCheckDropdowns();
+                
+                // Refresh display
+                updateRecommendations();
+                
+                showToast(`Successfully loaded ${updatedCount} sales prices!`);
+
             } catch (error) {
-                showToast('Error processing file: ' + error.message, true);
-                console.error(error);
-            } finally {
-                refreshBtn.innerHTML = originalText;
+                statusDiv.textContent = '⚠ Error reading file';
+                statusDiv.style.color = '#dc3545';
+                console.error('File processing error:', error);
+                showToast('Error processing sales data file', true);
             }
         });
 
-        // Initialize the app with enhancements
-        document.addEventListener('DOMContentLoaded', function() {
+        // Load sample data button
+        document.getElementById('loadSampleData').addEventListener('click', function() {
+            // Convert your provided data to the correct format
+            const sampleData = [
+                {Model: "GOOGLE PIXEL 7 PRO", Memory: "128GB", Grade: "GRADE 1", avgPrice: 258.74, salesCount: 93},
+                {Model: "GOOGLE PIXEL 8 PRO", Memory: "128GB", Grade: "GRADE 1", avgPrice: 391.92, salesCount: 59},
+                {Model: "GOOGLE PIXEL 7 PRO", Memory: "128GB", Grade: "GRADE 2", avgPrice: 247.81, salesCount: 46},
+                {Model: "GOOGLE PIXEL 8", Memory: "128GB", Grade: "GRADE 1", avgPrice: 318.29, salesCount: 35},
+                {Model: "GOOGLE PIXEL 8A", Memory: "128GB", Grade: "AA", avgPrice: 342.36, salesCount: 30},
+                {Model: "GOOGLE PIXEL 6 PRO", Memory: "128GB", Grade: "GRADE 2", avgPrice: 182.6, salesCount: 29},
+                {Model: "GOOGLE PIXEL 6", Memory: "128GB", Grade: "GRADE 1", avgPrice: 154.58, salesCount: 24},
+                {Model: "SAMSUNG GALAXY BOOK3 360", Memory: "16GB", Grade: "AA", avgPrice: 805.23, salesCount: 22},
+                {Model: "GOOGLE PIXEL 8", Memory: "128GB", Grade: "GRADE 2", avgPrice: 298.12, salesCount: 20},
+                {Model: "GOOGLE PIXEL 8 PRO", Memory: "128GB", Grade: "GRADE 2", avgPrice: 385.09, salesCount: 20}
+            ];
+
+            REFURBED_SALES_PRICES = {};
+            sampleData.forEach(row => {
+                const key = `${row.Model}|${row.Memory}|${row.Grade}`;
+                REFURBED_SALES_PRICES[key] = {
+                    avgPrice: row.avgPrice,
+                    salesCount: row.salesCount
+                };
+            });
+
+            populateQuickCheckDropdowns();
             updateRecommendations();
-            if (Object.keys(REFURBED_SALES_PRICES).length > 0) {
-                populateQuickCheckDropdowns();
+            showToast('Loaded sample data with 10 popular models');
+        });
+
+        // Improved grade mapping function
+        function mapGradeToInternal(grade) {
+            const gradeMap = {
+                'A': 'GRADE 1',
+                'B': 'GRADE 2', 
+                'C': 'GRADE 3',
+                'D': 'GRADE 3',
+                'E': 'GRADE 3',
+                'AA': 'AA',
+                'GRADE 1': 'GRADE 1',
+                'GRADE 1+': 'GRADE 1+',
+                'GRADE 2': 'GRADE 2',
+                'GRADE 3': 'GRADE 3'
+            };
+            return gradeMap[grade.toUpperCase()] || grade;
+        }
+
+        // Improved findMatchingPrice function
+        function findMatchingPrice(make, model, memory, grade) {
+            // Normalize inputs
+            let fullModel = `${make} ${model}`.trim().toUpperCase();
+            let memoryStr = memory.toString().trim().toUpperCase();
+            let gradeStr = mapGradeToInternal(grade);
+            
+            console.log(`Searching for: ${fullModel} | ${memoryStr} | ${gradeStr}`);
+
+            // Priority 1: Exact match
+            const exactKey = `${fullModel}|${memoryStr}|${gradeStr}`;
+            if (REFURBED_SALES_PRICES[exactKey]) {
+                console.log(`Exact match found: ${exactKey}`);
+                return REFURBED_SALES_PRICES[exactKey];
+            }
+
+            // Priority 2: Try different grade variations
+            const gradeVariations = [];
+            
+            if (gradeStr === 'GRADE 3') {
+                gradeVariations.push('GRADE 2', 'GRADE 1', 'AA');
+            } else if (gradeStr === 'GRADE 2') {
+                gradeVariations.push('GRADE 1', 'AA', 'GRADE 3');
+            } else if (gradeStr === 'GRADE 1') {
+                gradeVariations.push('AA', 'GRADE 1+', 'GRADE 2');
+            } else if (gradeStr === 'AA') {
+                gradeVariations.push('GRADE 1', 'GRADE 1+');
+            }
+
+            for (const altGrade of gradeVariations) {
+                const altKey = `${fullModel}|${memoryStr}|${altGrade}`;
+                if (REFURBED_SALES_PRICES[altKey]) {
+                    console.log(`Grade variation match: ${altKey}`);
+                    // Apply discount for lower grades
+                    let discount = 0;
+                    if (gradeStr === 'GRADE 3' && altGrade === 'GRADE 2') discount = 0.10;
+                    if (gradeStr === 'GRADE 3' && altGrade === 'GRADE 1') discount = 0.20;
+                    if (gradeStr === 'GRADE 2' && altGrade === 'GRADE 1') discount = 0.10;
+                    
+                    const baseData = REFURBED_SALES_PRICES[altKey];
+                    return {
+                        avgPrice: baseData.avgPrice * (1 - discount),
+                        salesCount: baseData.salesCount,
+                        adjustedFrom: `${altGrade}${discount > 0 ? ` -${(discount * 100).toFixed(0)}%` : ''}`
+                    };
+                }
+            }
+
+            console.log(`No match found for: ${fullModel} | ${memoryStr} | ${gradeStr}`);
+            return null;
+        }
+
+        // Rest of your existing functions (calculateMaxPurchasePrice, calculateProfit, etc.)
+        function calculateMaxPurchasePrice(avgSalePrice) {
+            const commission = parseFloat(document.getElementById('commission').value) / 100;
+            const vatTreatment = document.getElementById('vatTreatment').value;
+            const vatRate = parseFloat(document.getElementById('vatRate').value) / 100;
+            const accessories = parseFloat(document.getElementById('accessories').value);
+            const freight = parseFloat(document.getElementById('freight').value);
+            const targetMargin = parseFloat(document.getElementById('targetMargin').value) / 100;
+            
+            const commissionCost = avgSalePrice * commission;
+            
+            if (vatTreatment === 'marginal') {
+                return (avgSalePrice * (1 - targetMargin) - commissionCost - accessories - freight) / (1 + vatRate);
+            } else {
+                const netSale = avgSalePrice - commissionCost - accessories - freight;
+                const vatCost = netSale * (vatRate / (1 + vatRate));
+                return avgSalePrice * (1 - targetMargin) - vatCost - commissionCost - accessories - freight;
+            }
+        }
+
+        function calculateProfit(salePrice, purchasePrice) {
+            const commission = parseFloat(document.getElementById('commission').value) / 100;
+            const vatTreatment = document.getElementById('vatTreatment').value;
+            const vatRate = parseFloat(document.getElementById('vatRate').value) / 100;
+            const accessories = parseFloat(document.getElementById('accessories').value);
+            const freight = parseFloat(document.getElementById('freight').value);
+            
+            const commissionCost = salePrice * commission;
+            
+            let vatCost;
+            if (vatTreatment === 'marginal') {
+                vatCost = (salePrice * vatRate) - (purchasePrice * vatRate);
+            } else {
+                const netSale = salePrice - commissionCost - accessories - freight;
+                vatCost = netSale * (vatRate / (1 + vatRate));
             }
             
-            // Set initial button states
-            if (currentView === 'table') {
-                document.getElementById('viewToggleBtn').textContent = '📦 Card View';
-                document.getElementById('viewToggleBtn').classList.add('active');
-            }
+            const profit = salePrice - purchasePrice - vatCost - commissionCost - accessories - freight;
+            const margin = profit / purchasePrice;
+            
+            return { profit, margin, vatCost, commissionCost };
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRecommendations();
+            // Load sample data initially so the app has some data to work with
+            document.getElementById('loadSampleData').click();
         });
 
-        // ... (rest of your existing JavaScript functions with minor improvements)
+        // ... (include all your other existing functions like updateRecommendations, populateQuickCheckDropdowns, etc.)
+
     </script>
 </body>
 </html>
