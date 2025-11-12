@@ -1085,41 +1085,62 @@
                 const jsonData = XLSX.utils.sheet_to_json(firstSheet);
 
                 if (jsonData.length === 0) {
-                    throw new Error('No data found in file');
+                    statusDiv.textContent = '⚠ No data found in file';
+                    statusDiv.style.color = '#dc3545';
+                    return;
                 }
 
-                userStock = jsonData.map(row => {
-                    // Get quantity from any possible column
+                // Check what columns we have
+                const sampleRow = jsonData[0];
+                const columns = Object.keys(sampleRow);
+                
+                userStock = [];
+                
+                for (let row of jsonData) {
+                    // Get make, model, memory, grade
+                    const make = (row.Make || row.make || '').toString().toUpperCase();
+                    const model = (row.Model || row.model || '').toString().toUpperCase();
+                    const memory = (row.Memory || row.memory || row.Storage || '').toString();
+                    const grade = (row.Grade || row.grade || '').toString().toUpperCase();
+                    
+                    // Skip if missing essential fields
+                    if (!make || !model || !memory || !grade) continue;
+                    
+                    // Get quantity
                     let quantity = 1;
-                    if (row['A/Quantity']) quantity = parseInt(row['A/Quantity']);
-                    else if (row.Qty) quantity = parseInt(row.Qty);
-                    else if (row.Quantity) quantity = parseInt(row.Quantity);
-                    else if (row['Quantity Available']) quantity = parseInt(row['Quantity Available']);
-                    else if (row['Customer Demand']) quantity = parseInt(row['Customer Demand']);
+                    if (row['A/Quantity'] !== undefined) quantity = parseInt(row['A/Quantity']) || 1;
+                    else if (row.Qty !== undefined) quantity = parseInt(row.Qty) || 1;
+                    else if (row.Quantity !== undefined) quantity = parseInt(row.Quantity) || 1;
+                    else if (row['Quantity Available'] !== undefined) quantity = parseInt(row['Quantity Available']) || 1;
+                    else if (row['Customer Demand'] !== undefined) quantity = parseInt(row['Customer Demand']) || 1;
                     
-                    // Get price from any possible column
+                    // Get price - try every possible column
                     let purchasePrice = 0;
-                    if (row['Proposed Price']) purchasePrice = parseFloat(row['Proposed Price']);
-                    else if (row['Initial Price']) purchasePrice = parseFloat(row['Initial Price']);
-                    else if (row['Customer Bid']) purchasePrice = parseFloat(row['Customer Bid']);
-                    else if (row['Negotiated Bid']) purchasePrice = parseFloat(row['Negotiated Bid']);
-                    else if (row['Your Price']) purchasePrice = parseFloat(row['Your Price']);
-                    else if (row.Response) purchasePrice = parseFloat(row.Response);
-                    else if (row['Final_Price']) purchasePrice = parseFloat(row['Final_Price']);
-                    else if (row['Purchase Price']) purchasePrice = parseFloat(row['Purchase Price']);
+                    if (row['Proposed Price'] !== undefined) purchasePrice = parseFloat(row['Proposed Price']) || 0;
+                    else if (row['Initial Price'] !== undefined) purchasePrice = parseFloat(row['Initial Price']) || 0;
+                    else if (row['Customer Bid'] !== undefined) purchasePrice = parseFloat(row['Customer Bid']) || 0;
+                    else if (row['Negotiated Bid'] !== undefined) purchasePrice = parseFloat(row['Negotiated Bid']) || 0;
+                    else if (row['Your Price'] !== undefined) purchasePrice = parseFloat(row['Your Price']) || 0;
+                    else if (row.Response !== undefined) purchasePrice = parseFloat(row.Response) || 0;
+                    else if (row['Final_Price'] !== undefined) purchasePrice = parseFloat(row['Final_Price']) || 0;
+                    else if (row['Purchase Price'] !== undefined) purchasePrice = parseFloat(row['Purchase Price']) || 0;
+                    else if (row.Price !== undefined) purchasePrice = parseFloat(row.Price) || 0;
                     
-                    return {
-                        make: (row.Make || '').toString().toUpperCase(),
-                        model: (row.Model || '').toString().toUpperCase(),
-                        memory: (row.Memory || '').toString(),
-                        grade: (row.Grade || '').toString().toUpperCase(),
-                        quantity: quantity,
-                        purchasePrice: purchasePrice
-                    };
-                }).filter(item => item.purchasePrice > 0 && item.make && item.model);
+                    // Only add if has price
+                    if (purchasePrice > 0) {
+                        userStock.push({
+                            make: make,
+                            model: model,
+                            memory: memory,
+                            grade: grade,
+                            quantity: quantity,
+                            purchasePrice: purchasePrice
+                        });
+                    }
+                }
 
                 if (userStock.length === 0) {
-                    statusDiv.textContent = '⚠ No valid items found. Check: Make, Model, Grade, Memory, and Price columns exist with values > 0';
+                    statusDiv.textContent = '⚠ No items with prices > 0. Columns found: ' + columns.join(', ');
                     statusDiv.style.color = '#dc3545';
                     return;
                 }
