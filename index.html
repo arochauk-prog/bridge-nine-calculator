@@ -1088,8 +1088,8 @@
                     model: (row.Model || '').toString().toUpperCase(),
                     memory: (row.Memory || '').toString(),
                     grade: (row.Grade || '').toString().toUpperCase(),
-                    quantity: parseInt(row.Qty || row.Quantity || row['Quantity Available'] || row['Customer Demand'] || 1),
-                    purchasePrice: parseFloat(row['Customer Bid'] || row['Negotiated Bid'] || row['Your Price'] || row.Response || row['Final_Price'] || row['Purchase Price'] || row['Initial Price'] || row['Your_Final_Price'] || row['Your_Price'] || 0)
+                    quantity: parseInt(row['A/Quantity'] || row.Qty || row.Quantity || row['Quantity Available'] || row['Customer Demand'] || 1),
+                    purchasePrice: parseFloat(row['Proposed Price'] || row['Initial Price'] || row['Customer Bid'] || row['Negotiated Bid'] || row['Your Price'] || row.Response || row['Final_Price'] || row['Purchase Price'] || row['Your_Final_Price'] || row['Your_Price'] || 0)
                 })).filter(item => item.purchasePrice > 0);
 
                 statusDiv.textContent = `✓ Loaded ${userStock.length} items`;
