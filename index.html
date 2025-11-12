@@ -1076,6 +1076,7 @@
             const statusDiv = document.getElementById('uploadStatus');
             const clearBtn = document.getElementById('clearFileBtn');
             statusDiv.textContent = 'Processing...';
+            statusDiv.style.color = '#17a2b8';
 
             try {
                 const data = await file.arrayBuffer();
@@ -1083,21 +1084,52 @@
                 const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
                 const jsonData = XLSX.utils.sheet_to_json(firstSheet);
 
-                userStock = jsonData.map(row => ({
-                    make: (row.Make || '').toString().toUpperCase(),
-                    model: (row.Model || '').toString().toUpperCase(),
-                    memory: (row.Memory || '').toString(),
-                    grade: (row.Grade || '').toString().toUpperCase(),
-                    quantity: parseInt(row['A/Quantity'] || row.Qty || row.Quantity || row['Quantity Available'] || row['Customer Demand'] || 1),
-                    purchasePrice: parseFloat(row['Proposed Price'] || row['Initial Price'] || row['Customer Bid'] || row['Negotiated Bid'] || row['Your Price'] || row.Response || row['Final_Price'] || row['Purchase Price'] || row['Your_Final_Price'] || row['Your_Price'] || 0)
-                })).filter(item => item.purchasePrice > 0);
+                if (jsonData.length === 0) {
+                    throw new Error('No data found in file');
+                }
+
+                userStock = jsonData.map(row => {
+                    // Get quantity from any possible column
+                    let quantity = 1;
+                    if (row['A/Quantity']) quantity = parseInt(row['A/Quantity']);
+                    else if (row.Qty) quantity = parseInt(row.Qty);
+                    else if (row.Quantity) quantity = parseInt(row.Quantity);
+                    else if (row['Quantity Available']) quantity = parseInt(row['Quantity Available']);
+                    else if (row['Customer Demand']) quantity = parseInt(row['Customer Demand']);
+                    
+                    // Get price from any possible column
+                    let purchasePrice = 0;
+                    if (row['Proposed Price']) purchasePrice = parseFloat(row['Proposed Price']);
+                    else if (row['Initial Price']) purchasePrice = parseFloat(row['Initial Price']);
+                    else if (row['Customer Bid']) purchasePrice = parseFloat(row['Customer Bid']);
+                    else if (row['Negotiated Bid']) purchasePrice = parseFloat(row['Negotiated Bid']);
+                    else if (row['Your Price']) purchasePrice = parseFloat(row['Your Price']);
+                    else if (row.Response) purchasePrice = parseFloat(row.Response);
+                    else if (row['Final_Price']) purchasePrice = parseFloat(row['Final_Price']);
+                    else if (row['Purchase Price']) purchasePrice = parseFloat(row['Purchase Price']);
+                    
+                    return {
+                        make: (row.Make || '').toString().toUpperCase(),
+                        model: (row.Model || '').toString().toUpperCase(),
+                        memory: (row.Memory || '').toString(),
+                        grade: (row.Grade || '').toString().toUpperCase(),
+                        quantity: quantity,
+                        purchasePrice: purchasePrice
+                    };
+                }).filter(item => item.purchasePrice > 0 && item.make && item.model);
+
+                if (userStock.length === 0) {
+                    statusDiv.textContent = '⚠ No valid items found. Check: Make, Model, Grade, Memory, and Price columns exist with values > 0';
+                    statusDiv.style.color = '#dc3545';
+                    return;
+                }
 
                 statusDiv.textContent = `✓ Loaded ${userStock.length} items`;
                 statusDiv.style.color = '#28a745';
                 clearBtn.style.display = 'inline-block';
                 updateRecommendations();
             } catch (error) {
-                statusDiv.textContent = '⚠ Error reading file. Check file format.';
+                statusDiv.textContent = '⚠ Error: ' + error.message;
                 statusDiv.style.color = '#dc3545';
                 console.error(error);
             }
